@@ -6,8 +6,8 @@
 #include <sys/file.h>
 
 int main() {
-    int ticketNumber = 1;
-    int fileDescriptor = open("ticket_file.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+    int ticketNumber;
+    int fileDescriptor = open("ticket_file.txt", O_RDWR);
     if (fileDescriptor == -1) {
         perror("Failed to open the file");
         return 1;
@@ -16,11 +16,12 @@ int main() {
         perror("Failed to lock the file");
         return 1;
     }
+    read(fileDescriptor, &ticketNumber, sizeof(ticketNumber));
+    ticketNumber++;
+    lseek(fileDescriptor, 0, SEEK_SET);
     write(fileDescriptor, &ticketNumber, sizeof(ticketNumber));
     flock(fileDescriptor, LOCK_UN);
     close(fileDescriptor);
-    
-    printf("Ticket reservation successful.\n");
-    
+    printf("New ticket number: %d\n", ticketNumber);
     return 0;
 }

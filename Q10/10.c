@@ -5,7 +5,7 @@
 
 int main()
 {
-   int fd = open("sample.txt",O_RDWR|O_CREAT | O_TRUNC, 0666);
+   int fd = open("readfromhere.txt",O_RDWR|O_CREAT | O_TRUNC, 0666);
    if(fd== -1)
    {
            perror("error in opening file");
@@ -30,8 +30,7 @@ int main()
            return 1;
    }
 
-   //write more 10B
-   const char d2[]="SwarnimKukreti";
+   const char d2[]="Farman Ahmed";
    byt = write(fd, d2, sizeof(d2) -1);
    if(byt==-1)
    {

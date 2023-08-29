@@ -1,44 +1,52 @@
-#include<stdio.h>
-#include<unistd.h>
-#include<fcntl.h>
-#include<sys/types.h>
-#include<sys/stat.h>
-#include<stdlib.h>
-struct {
-	int train_num;
-	int ticket_count;
-} db;
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/file.h>
 
-int main() {
-	int fd, input;
-	fd = open("record.txt", O_RDWR);
-	printf("Select train number (1,2,3): \n");
-	scanf("%d", &input);
-
-	struct flock lock;
-	lock.l_type = F_WRLCK;
-	lock.l_whence = SEEK_SET;
-	lock.l_start = (input-1)*sizeof(db);
-	lock.l_len = sizeof(db);
-	lock.l_pid = getpid();
-
-	lseek(fd, (input - 1)*sizeof(db), SEEK_SET);
-	read(fd,&db, sizeof(db));
-	printf("Before entering into critical section \n");
-	
-	fcntl(fd, F_SETLKW, &lock);
-	printf("Ticket number: %d \n", db.ticket_count);
-	db.ticket_count++;
-	
-	lseek(fd, -1*sizeof(db), SEEK_CUR);
-	write(fd, &db, sizeof(db));;
-	printf("To Book Ticket, press Enter: \n");
-	getchar();
-	
-	lock.l_type=F_UNLCK;
-	fcntl(fd, F_SETLK, &lock);
-	printf("Booked\n");
-
+#define RECORD_SIZE 100
+int lock_record(int fd, int record_number, int lock_type) {
+    struct flock fl;
+    fl.l_type = lock_type;
+    fl.l_whence = SEEK_SET;
+    fl.l_start = record_number * RECORD_SIZE;
+    fl.l_len = RECORD_SIZE;
+    return fcntl(fd, F_SETLKW, &fl);
 }
 
+int main() {
+    int fd = open("record_file.txt", O_RDWR | O_CREAT, 0644);
+    if (fd == -1) {
+        perror("Failed to open the file");
+        return 1;
+    }
+    char records[3][RECORD_SIZE] = {"Record 1", "Record 2", "Record 3"};
+    for (int i = 0; i < 3; i++) {
+        if (lock_record(fd, i, F_WRLCK) == -1) {
+            perror("Failed to lock the record for writing");
+            return 1;
+        }
+        lseek(fd, i * RECORD_SIZE, SEEK_SET);
+        write(fd, records[i], RECORD_SIZE);
+        printf("Record %d written.\n", i);
+        sleep(2); 
+        lock_record(fd, i, F_UNLCK); 
+    }
+    for (int i = 0; i < 3; i++) {
+        if (lock_record(fd, i, F_RDLCK) == -1) {
+            perror("Failed to lock the record for reading");
+            return 1;
+        }
+        lseek(fd, i * RECORD_SIZE, SEEK_SET);
+        char buffer[RECORD_SIZE];
+        read(fd, buffer, RECORD_SIZE);
+        printf("Record %d: %s\n", i, buffer);
+        sleep(1); 
+        lock_record(fd, i, F_UNLCK); 
+    }
 
+    close(fd);
+    
+    return 0;
+}
