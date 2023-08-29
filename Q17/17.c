@@ -11,10 +11,14 @@ int main() {
     if (fileDescriptor == -1) {
         perror("Failed to open the file");
         return 1;
+    }else{
+        printf("file open succesfully\n");
     }
     if (flock(fileDescriptor, LOCK_EX) == -1) {
         perror("Failed to lock the file");
         return 1;
+    }else{
+        printf("lock applied successfully\n");
     }
     write(fileDescriptor, &ticketNumber, sizeof(ticketNumber));
     flock(fileDescriptor, LOCK_UN);

@@ -1,11 +1,11 @@
 #include<unistd.h>
 #include<fcntl.h>
 #include<sys/types.h>
+#include<sys/file.h>
 #include<stdlib.h>
 #include<stdio.h>
 
-int main()
-{
+int main(){
 	struct flock lock;
 	int fd;
 	fd=open("db",O_RDWR);
@@ -16,11 +16,11 @@ int main()
 	lock.l_pid=getpid();
 	printf("Before entering C.S.\n");
 	fcntl(fd,F_SETLKW,&lock);
-	printf("Inside critical sec   \n");
-	printf("Enter to unlock    \n");
+	printf("Inside critical sec\n");
+	printf("Enter to unlock\n");
 	getchar();
-	printf("Unlocked  \n");
+	printf("Unlocked\n");
 	lock.l_type=F_UNLCK;
 	fcntl(fd,F_SETLK,&lock);
-	printf("Finish  \n");
+	printf("Finish\n");
 }
