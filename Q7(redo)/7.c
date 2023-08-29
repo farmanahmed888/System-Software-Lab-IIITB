@@ -1,30 +1,32 @@
-#include <stdio.h>
-#include <stdlib.h> 
-int main(){
-    FILE *fl1,*fl2;
-    char inpFile[100],c;
-    printf("enter file name:\n");
-    scanf("%s",inpFile);
-    fl1=fopen(inpFile, "r");
-    if(fl1==NULL){
-        printf("cannot open %s",fl1);
-        exit(0);
-    }
-    printf("enter file name to write to:\n");
-    scanf("%s",inpFile);
-    fl2=fopen(inpFile, "w");
-    if(fl2==NULL){
-        printf("cannot open %s",fl2);
-        exit(0);
-    }
-    c=fgetc(fl1);
-    while (c!=EOF) {
-        fputc(c, fl2);
-        c=fgetc(fl1);
-    }
-    printf("contents gor copied\n");
-    fclose(fl1);
-    fclose(fl2);
-    return 0;
-    
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include<stdio.h>
+#include<unistd.h>
+int main(int argc,char* argv[])
+{
+	if(argc!=3)
+		{
+		printf("You are useless");
+		return 0;
+	}
+          int fd_read=open(argv[1],O_RDONLY);
+	  int fd_write=open(argv[2],O_WRONLY|O_CREAT,0644);
+	  if(fd_write==-1||fd_read==-1)
+		  printf("Useless");
+	  while(1)
+	  {
+	  char buf;
+	 int char_read=read(fd_read,&buf,1);
+	 if (char_read==0)
+		break;
+	 int char_written=write(fd_write,&buf,1);
+	  }
+	  int fd_read_close=close(fd_read);
+	  int fd_write_close=close(fd_write);
+
+	  if(fd_read_close==-1||fd_write_close==-1)
+		  printf("Totally useless");
+	return 0;
 }
+
