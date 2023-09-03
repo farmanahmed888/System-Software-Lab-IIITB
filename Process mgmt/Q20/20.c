@@ -16,7 +16,7 @@ int main() {
     }
 
     // Get the updated priority
-    int new_priority = getpriority(PRIO_PROCESS, 0);
+    int new_priority = nice(5);
     printf("New priority: %d\n", new_priority);
 
     sleep(100);
