@@ -12,8 +12,8 @@ int main(){
         exit(1);
     }
     if(pid==0){
-        printf("In child\n");
         sleep(30);
+        printf("In child\n");
     }else{
         printf("In parent\n");
         exit(0);
