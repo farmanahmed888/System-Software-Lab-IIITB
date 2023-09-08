@@ -1,3 +1,4 @@
+#include <bits/types/struct_sched_param.h>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -28,7 +29,8 @@ int main(){
     if(changed_policy==-1) printf("changing scheduling policy failed.\n");
     else{
         printf("After modification Scheduled Policy is :--\n");
-        switch (changed_policy) {
+        int get_policy=sched_getscheduler(pid);
+        switch (get_policy) {
             case SCHED_FIFO:
                 printf("SCHED_FIFO\n");
                 break;
