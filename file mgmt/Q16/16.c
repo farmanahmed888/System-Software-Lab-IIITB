@@ -17,6 +17,9 @@ int main(){
 	printf("Before entering C.S.\n");
 	fcntl(fd,F_SETLKW,&lock);
 	printf("Inside critical sec\n");
+    char *buff="writing in buffer";
+    write(fd,buff,sizeof(buff));
+    sleep(30);
 	printf("Enter to unlock\n");
 	getchar();
 	printf("Unlocked\n");

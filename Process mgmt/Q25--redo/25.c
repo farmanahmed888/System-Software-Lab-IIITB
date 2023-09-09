@@ -14,8 +14,8 @@ int main(){
         if(pid==-1){
             printf("fork failed%d\n",i);
         }else if(pid==0){
-            printf("child process %d \n,",i);
-            printf("child pid %d",getpid());
+            printf("child process %d \n",i);
+            printf("child pid %d\n",getpid());
             sleep(10);
             printf("child pid done %d \n",getpid());
         }else{
