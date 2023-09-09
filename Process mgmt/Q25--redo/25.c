@@ -9,20 +9,27 @@
 int main(){
     int status;
     pid_t pid,child_pid[3];
-    for(int i=0;i<3;i++){
-        pid=fork();
-        if(pid==-1){
-            printf("fork failed%d\n",i);
-        }else if(pid==0){
-            printf("child process %d \n",i);
-            printf("child pid %d\n",getpid());
-            sleep(10);
-            printf("child pid done %d \n",getpid());
-        }else{
-            child_pid[i]=pid;
-        }
+    pid_t pid1,pid2,pid3;
+    pid1=fork();
+    if(pid1==-1){
+        printf("fork failed for pid1");
+    }else{
+        printf("child process 1\n");
     }
-    pid_t pickpid=child_pid[2];
+    pid2=fork();
+    if(pid2==-1){
+        printf("fork failed for pid1");
+    }else{
+        sleep(10);
+        printf("child process 2\n");
+    }
+    pid3=fork();
+    if(pid3==-1){
+        printf("fork failed for pid1");
+    }else{
+        printf("child process 3\n");
+    }
+    pid_t pickpid=pid2;
     printf("parent waiting for pid%d\n",pickpid);
     pid=waitpid(pickpid, &status, 0);
     if(pid==-1){
