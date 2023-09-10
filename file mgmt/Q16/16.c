@@ -1,3 +1,12 @@
+/*
+============================================================================
+Name : 16.c
+Author : Farman Ahmed
+Description : Write a program to perform mandatory locking. a. Implement write lock
+b. Implement read lock
+Date: 10th September, 2023.
+============================================================================
+*/
 #include<unistd.h>
 #include<fcntl.h>
 #include<sys/types.h>

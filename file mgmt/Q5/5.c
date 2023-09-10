@@ -1,3 +1,11 @@
+/*
+============================================================================
+Name : 5.c
+Author : Farman Ahmed
+Description : Write a program to create five new files with infinite loop. Execute the program in the background and check the file descriptor table at /proc/pid/fd.
+Date: 10th September, 2023.
+============================================================================
+*/
 #include <errno.h>
 #include <fcntl.h>
 #include <stdio.h>

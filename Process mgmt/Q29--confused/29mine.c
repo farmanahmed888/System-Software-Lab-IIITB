@@ -1,3 +1,11 @@
+/*
+============================================================================
+Name : 29.c
+Author : Farman Ahmed
+Description : Write a program to get scheduling policy and modify the scheduling policy (SCHED_FIFO, SCHED_RR).
+Date: 10th September, 2023.
+============================================================================
+*/
 #include <bits/types/struct_sched_param.h>
 #include <stdio.h>
 #include <unistd.h>

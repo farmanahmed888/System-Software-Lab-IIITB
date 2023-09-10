@@ -1,3 +1,11 @@
+/*
+============================================================================
+Name : 24.c
+Author : Farman Ahmed
+Description : Write a program to create an orphan process.
+Date: 10th September, 2023.
+============================================================================
+*/
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/stat.h>

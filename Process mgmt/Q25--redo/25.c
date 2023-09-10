@@ -1,3 +1,11 @@
+/*
+============================================================================
+Name : 25.c
+Author : Farman Ahmed
+Description : Write a program to create three child processes. The parent should wait for a particular child (use waitpid system call)
+Date: 10th September, 2023.
+============================================================================
+*/
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/stat.h>

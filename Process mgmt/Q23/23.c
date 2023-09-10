@@ -1,3 +1,11 @@
+/*
+============================================================================
+Name : 23.c
+Author : Farman Ahmed
+Description :  Write a program to create a Zombie state of the running program.
+Date: 10th September, 2023.
+============================================================================
+*/
 #include <stdio.h>
 #include <fcntl.h>
 #include <sys/stat.h>
