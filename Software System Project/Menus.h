@@ -1,3 +1,5 @@
+#ifdef MENUS_H
+#define MENUS_H
 #include <stdio.h>
 void MainMenu(){
     printf("---x--- Welcome to Course Registraion ---x---\n");
@@ -25,3 +27,4 @@ void FacultyMenu(){
 void StudentMenu(){
     
 }
+#endif

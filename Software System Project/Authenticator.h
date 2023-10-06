@@ -1,3 +1,5 @@
+#ifdef AUTHENTICATOR_H
+#define AUTHENTICATOR_H
 #include <stdio.h>
 #include<string.h>
 #include <fcntl.h>
@@ -27,3 +29,4 @@ void AuthenticateFaculty(){
 void AuthenticateStudent(){
     
 }
+#endif

@@ -3,8 +3,9 @@
 #include <fcntl.h>
 #include <unistd.h>
 
-#include "menus.h"
+#include "Menus.h"
 #include "Login.h"
+#include "dofunctions.h"
 int main(){
     //call main menu
     MainMenu();

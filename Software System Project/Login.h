@@ -1,5 +1,6 @@
+#ifdef LOGIN_H
+#define LOGIN_H
 #include <stdio.h>
-
 #include "Authenticator.h"
 int AdminLogin(){
     const char* fileName="AdminCred.txt";
@@ -19,3 +20,4 @@ int AdminLogin(){
     }
     return auth;
 }
+#endif
