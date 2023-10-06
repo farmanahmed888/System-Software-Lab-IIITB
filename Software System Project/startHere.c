@@ -1,7 +1,11 @@
+#ifdef SERVER_H
+#define SERVER_H
 #include <stdio.h>
 #include <strings.h>
 #include <fcntl.h>
 #include <unistd.h>
+
+
 
 #include "Menus.h"
 #include "Login.h"
@@ -43,4 +47,6 @@ int main(){
         case 3: StudentMenu(); break;
         default: printf("Wrong Choice. Exiting...\n");break;
     }
+    return 0;
 }
+#endif
