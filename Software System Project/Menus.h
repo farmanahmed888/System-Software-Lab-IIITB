@@ -1,4 +1,4 @@
-#ifdef MENUS_H
+#ifndef MENUS_H
 #define MENUS_H
 #include <stdio.h>
 void MainMenu(){

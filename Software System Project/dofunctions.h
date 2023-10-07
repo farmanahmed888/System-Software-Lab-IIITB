@@ -1,4 +1,4 @@
-#ifdef DOFUNCTIONS_H
+#ifndef DOFUNCTIONS_H
 #define DOFUNCTIONS_H
 #include <stdio.h>
 #include <fcntl.h>
@@ -10,32 +10,35 @@
 
 void AddStudent(){
     struct Student addThisStudent;
-    printf("Enter Name of student\n");
+    printf("Enter Name of student:\n");
     scanf("%s",addThisStudent.name);
-    printf("Enter Roll Number of student\n");
+    printf("Enter Roll Number of student:\n");
     scanf("%s",addThisStudent.rollno);
-    printf("Enter Email ID of student\n");
+    printf("Enter Email ID of student:\n");
     scanf("%s",addThisStudent.emailId);
-    printf("Enter Password of student\n");
+    printf("Enter Password of student:\n");
     scanf("%s",addThisStudent.password);
-    
-
-    
-    int checker=searchStudent("Student.txt",addThisStudent.rollno);
-    if(checker==0){
-        printf("Duplicate Entry\n");
+    int dupChecker=searchStudent("Student.txt", addThisStudent.rollno);
+    if(dupChecker==-1){
+        printf("Checking for duplicate failed\n");
+        return;
+    }else if(dupChecker==0){
+        printf("Duplicate entry\n");
         return;
     }else{
-        int fd=open("Student.txt",O_RDONLY|O_CREAT|O_APPEND,0666);
-        if(fd==-1){
-            printf("Error in adding entry\n");
+        int fd=open("Student.txt",O_RDWR|O_CREAT,0666);
+        if(fd==1){
+            printf("Unable to access student database\n");
             return;
         }
-        addThisStudent.status=1;
-        write(fd,&addThisStudent,sizeof(addThisStudent));
-        printf("Student ID is created with Roll Number:  %s\n",addThisStudent.rollno);
-        close(fd);
+        if(write(fd,&addThisStudent,sizeof(addThisStudent))>0){
+            printf("student added successfully with roll number:  %s\n",addThisStudent.rollno);
+        }else{
+            printf("unable to add this student with rool number:  %s\n",addThisStudent.rollno);
+        }
     }
+    
+    
 }
 void ViewStudent(){
     char inputRollNo[100];
@@ -174,6 +177,7 @@ void ModifyStudent(){
     }else{
         printf("Student Record not found\n");
     }
+    return;
 }
 void ModifyFaculty(){
 

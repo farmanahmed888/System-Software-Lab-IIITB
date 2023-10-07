@@ -1,9 +1,9 @@
-#ifdef LOGIN_H
+#ifndef LOGIN_H
 #define LOGIN_H
 #include <stdio.h>
 #include "Authenticator.h"
 int AdminLogin(){
-    const char* fileName="AdminCred.txt";
+    const char* fileName="Admin.txt";
     char inputEmail[100];
     char inputPassword[100];
     printf("Enter EmailID:\n");

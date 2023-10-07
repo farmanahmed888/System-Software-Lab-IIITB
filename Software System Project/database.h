@@ -1,4 +1,4 @@
-#ifdef DATABASE_H
+#ifndef DATABASE_H
 #define DATABASE_H
 struct Course{
     char course_code[5];
@@ -18,7 +18,7 @@ struct Student{
 	char emailId[100];
 	char password[100];
 	int  status;
-	struct Course courseEnrolled[6];
+	//struct Course courseEnrolled[6];
 };
 struct Faculty{
 	char name[100];

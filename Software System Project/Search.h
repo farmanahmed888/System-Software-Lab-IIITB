@@ -1,4 +1,4 @@
-#ifdef SEARCH_H
+#ifndef SEARCH_H
 #define SEARCH_H
 #include <stdio.h>
 #include <fcntl.h>
@@ -8,11 +8,14 @@
 #include "database.h"
 int searchStudent(const char* fileName,
                   const char* inputRollNo){
-    int fd=open(fileName,O_RDONLY);
+    int fd=open(fileName,O_RDONLY|O_CREAT,0666);
     if(fd==-1){
-        printf("checking for entry failed\n");
+        printf("checking for entry failed coz file does not exist yet\n");
+        return -1;
     }
     struct Student searchEntry;
+    //because of while loop we will move cursor, hence we need to move it back to start
+    lseek(fd,SEEK_SET,0);
     while(read(fd,&searchEntry,sizeof(searchEntry))>0){
         if(strcmp(searchEntry.rollno,inputRollNo)==0){
             //duplicate found

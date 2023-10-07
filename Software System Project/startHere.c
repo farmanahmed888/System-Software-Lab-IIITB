@@ -1,5 +1,3 @@
-#ifdef SERVER_H
-#define SERVER_H
 #include <stdio.h>
 #include <strings.h>
 #include <fcntl.h>
@@ -49,4 +47,3 @@ int main(){
     }
     return 0;
 }
-#endif

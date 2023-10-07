@@ -1,7 +1,7 @@
-#ifdef AUTHENTICATOR_H
+#ifndef AUTHENTICATOR_H
 #define AUTHENTICATOR_H
 #include <stdio.h>
-#include<string.h>
+#include <string.h>
 #include <fcntl.h>
 #include <unistd.h>
 
@@ -9,7 +9,7 @@
 int AuthenticateAdmin(const char* fileName,
                       const char* inputEmail,
                       const char* inputPassword){
-    int fd=open(fileName,O_RDONLY);
+    int fd=open(fileName,O_RDONLY,0666);
     if(fd==-1){
         printf("Unable to authenticate admin\n");
         return -1;
