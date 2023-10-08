@@ -1,5 +1,5 @@
-#ifndef DOFUNCTIONS_H
-#define DOFUNCTIONS_H
+#ifndef ADMINFUNCTIONS_H
+#define ADMINFUNCTIONS_H
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
@@ -18,7 +18,7 @@ void AddStudent(){
     scanf("%s",addThisStudent.emailId);
     printf("Enter Password of student:\n");
     scanf("%s",addThisStudent.password);
-    int checker=searchUser("Student.txt", addThisStudent.rollno,0);
+    int checker=universalSearch("Student.txt", addThisStudent.rollno,0);
     if(checker==-1){
         printf("Checking for duplicate failed\n");
         return;
@@ -36,8 +36,9 @@ void AddStudent(){
             printf("student added successfully with roll number:  %s\n",addThisStudent.rollno);
         }else{
             printf("unable to add this student with roll number:  %s\n",addThisStudent.rollno);
-            close(fd);
+            
         }
+        close(fd);
     }
     
     
@@ -78,7 +79,7 @@ void AddFaculty(){
     printf("Enter Password of faculty\n");
     scanf("%s",addThisFaculty.password);
 
-    int checker=searchUser("Facutly.txt",addThisFaculty.facultyUID,1);
+    int checker=universalSearch("Faculty.txt",addThisFaculty.facultyUID,1);
     if(checker==-1){
         printf("Checking for duplicate failed\n");
         return;
@@ -104,11 +105,12 @@ void ViewFaculty(){
     struct Faculty viewThisFaculty;
     printf("Enter UID of faculty\n");
     scanf("%s",inputUID);
-    int fd=open("Faculty.txt",O_RDONLY|O_CREAT,0666);
+    int fd=open("Faculty.txt",O_RDONLY,0666);
     if(fd==-1){
         printf("Unable to search for faculty\n");
         return;
     }
+    lseek(fd,0,SEEK_SET);
     while(read(fd,&viewThisFaculty,sizeof(viewThisFaculty))>0){
         if(strcmp(inputUID,viewThisFaculty.facultyUID)==0){
             //found match
@@ -129,7 +131,7 @@ void ActivateStudent(){
     char inputRollNo[100];
     struct Student activateThisStudent;
     scanf("%s",inputRollNo);
-    int checker=searchUser("Student.txt",inputRollNo,0);
+    int checker=universalSearch("Student.txt",inputRollNo,0);
     if(checker==0){
         int fd=open("Student.txt",O_RDWR,0666);
         if(fd==-1){
@@ -154,7 +156,7 @@ void BlockStudent(){
     char inputRollNo[100];
     struct Student deactivateThisStudent;
     scanf("%s",inputRollNo);
-    int checker=searchUser("Student.txt",inputRollNo,0);
+    int checker=universalSearch("Student.txt",inputRollNo,0);
     if(checker==0){
         int fd=open("Student.txt",O_RDWR,0666);
         if(fd==-1){
@@ -179,7 +181,7 @@ void ModifyStudent(){
     char inputRollNo[100];
     scanf("%s",inputRollNo);
     struct Student chkStudent;
-    int checker=searchUser("Student.txt",inputRollNo,0);
+    int checker=universalSearch("Student.txt",inputRollNo,0);
     if(checker==0){
         int fd=open("Student.txt",O_RDWR,0666);
         if(fd==-1){
@@ -241,6 +243,62 @@ void ModifyStudent(){
     return;
 }
 void ModifyFaculty(){
+    //pending
+    printf("Enter UID Number of faculty to modify\n");
+    char inputUID[100];
+    scanf("%s",inputUID);
+    struct Faculty chkFaculty;
+    int checker=universalSearch("Student.txt",inputUID,0);
+    if(checker==0){
+        int fd=open("Faculty.txt",O_RDWR,0666);
+        if(fd==-1){
+            printf("Error in modifying entry\n");
+            return;
+        }
+        while(read(fd,&chkFaculty,sizeof(chkFaculty))>0){
+            if(strcmp(chkFaculty.facultyUID,inputUID)==0){
+                printf("What do you want to modify?\n");
+                printf("1. Name\n");
+                printf("2. Email ID\n");
+                printf("3. Password\n");
+                printf("4. Add new Course\n");
+                printf("5. Remove new Course\n");
+                int action;
+                scanf("%d",&action);
+                switch(action){
+                    case 1:printf("Enter a new name\n");
+                            {
+                                scanf("%s",chkFaculty.name);
+                                break;
+                            }
+                    case 2:printf("Enter new EmailID\n");
+                            {
+                                scanf("%s",chkFaculty.emailId);
+                                break;
+                            }
+                    case 3:printf("Enter new password\n");
+                            {
+                                scanf("%s",chkFaculty.password);
+                                break;
+                            }
+                    case 4:printf("Enter new Active Status\n");
+                            {
+                                //do later
+                                break;
+                            }
+                    case 5:printf("Student has enrolled in following courses\n");//change this
+                            {
+                                //do later
+                            }
+                    
+                    default: printf("invalid option\n");break;
+                }
+            }
+        }
+    }else{
+        printf("Student Record not found\n");
+    }
+    return;
 
 }
 #endif

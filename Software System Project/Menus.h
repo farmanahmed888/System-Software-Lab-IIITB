@@ -22,7 +22,13 @@ void AdminMenu(){
 	printf("9.Logout and Exit\n");
 }
 void FacultyMenu(){
-
+    printf("---x--- Welcome to Faculty Menu ---x---\n");
+    printf("Select your choice:\n");
+	printf("1.View Offering Courses\n");
+	printf("2.Add New Courses\n");
+	printf("3.Remove Course from Catalog\n");
+	printf("4.Change Password\n");
+	printf("5.Logout and Exit\n");
 }
 void StudentMenu(){
     

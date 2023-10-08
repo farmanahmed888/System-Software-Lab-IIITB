@@ -1,8 +1,9 @@
 #ifndef DATABASE_H
 #define DATABASE_H
 struct Course{
-    char course_code[5];
+    char course_code[100];
 	char course_name[100];
+    char facultyUID[100];
     int  credits;
     int  currentStudentsEnrolled;
     int  maxStudentsAllowed;
@@ -25,6 +26,6 @@ struct Faculty{
     char facultyUID[100];
 	char emailId[100];
 	char password[100];
-	struct Course courseOffered[6];
+	//struct Course courseOffered[6];
 };
 #endif

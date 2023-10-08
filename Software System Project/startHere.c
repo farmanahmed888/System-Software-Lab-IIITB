@@ -7,7 +7,9 @@
 
 #include "Menus.h"
 #include "Login.h"
-#include "dofunctions.h"
+#include "Search.h"
+#include "adminFunctions.h"
+#include "facultyFunctions.h"
 int main(){
     //call main menu
     MainMenu();
@@ -15,7 +17,7 @@ int main(){
     scanf("%d",&choice);
     switch(choice){
         case 1: 
-                printf("Enter Credentials\n");
+                printf("Enter Admin Credentials\n");
                 {
                     int isValid=AdminLogin();
                     if(isValid==0){
@@ -40,8 +42,33 @@ int main(){
                         }
                         if(pick==9) break;
                     }
+                    break;
                 }
-        case 2: FacultyMenu(); break;
+        case 2: printf("Enter Faculty Credentials\n");
+                {
+                    //do something similar to admin
+                    const char* facultyUID=FacultyLogin();
+                    if(strcmp(facultyUID,"-1")==0){
+                        printf("Faculty Credentials not valid, hence exiting...\n");
+                        break;
+                    }
+                    while(1){
+                        printf("Welcome %s\n",facultyUID);
+                        FacultyMenu();
+                        int pick;
+                        scanf("%d",&pick);
+                        switch(pick){
+                            case 1: ViewOfferingCourse(facultyUID);break;
+                            case 2: AddNewCourse(facultyUID);break;
+                            case 3: RemoveCourse(facultyUID);break;
+                            case 4: ChangePassword(facultyUID);break;
+                            case 5: break;
+                            default: break;
+                        }
+                        if(pick==5) break;
+                    }
+                    break;
+                }
         case 3: StudentMenu(); break;
         default: printf("Wrong Choice. Exiting...\n");break;
     }
