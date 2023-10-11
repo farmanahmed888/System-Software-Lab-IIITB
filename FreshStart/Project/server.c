@@ -50,8 +50,8 @@ int main(int argc, char* argv[]){
         char* mainMenu="Welcome to Academia\n"
                         "Enter your Choice\n"
                         "1. Admin\n"
-                        "2. Professor\n"
-                        "3. Student\n";
+                        "2. Student\n"
+                        "3. Faculty\n";
         
         write(newsockfd,mainMenu,strlen(mainMenu));
         //write main menu
@@ -202,14 +202,6 @@ int main(int argc, char* argv[]){
                     read(newsockfd,&addFaculty.facultyUID,sizeof(addFaculty.facultyUID));
                     //read Faculty uid
 
-                    //write Faculty emailID
-                    msg="Enter faculty emailID\n";
-                    write(newsockfd,msg,strlen(msg));
-                    //write Faculty emailID
-
-                    //read Faculty emailID
-                    read(newsockfd,&addFaculty.emailId,sizeof(addFaculty.emailId));
-                    //read Faculty emailID
 
                     //write Faculty password
                     msg="Enter Faculty password\n";
@@ -567,13 +559,13 @@ int main(int argc, char* argv[]){
         }else if(choice==3){
             //faculty login
             //write input email msg
-            char* EmailMsg="Enter Email:\n";
-            write(newsockfd,EmailMsg,strlen(EmailMsg));
+            char* facUIDMsg="Enter faculty UID:\n";
+            write(newsockfd,facUIDMsg,strlen(facUIDMsg));
             //write input email msg
 
             //read input email
-            char inputEmail[100];
-            read(newsockfd,&inputEmail,sizeof(inputEmail));
+            char inputFacUID[100];
+            read(newsockfd,&inputFacUID,sizeof(inputFacUID));
             //read input email
 
             //write input Password msg
@@ -585,11 +577,235 @@ int main(int argc, char* argv[]){
             char inputPassword[100];
             read(newsockfd,&inputPassword,sizeof(inputPassword));
             //read input password
-            int isValid=AuthenticateFaculty(inputEmail,inputPassword);
+
+
+
+            int isValid=AuthenticateFaculty(inputFacUID,inputPassword);
 
             //write isvalid to client
             write(newsockfd,&isValid,sizeof(isValid));
             //write isvalid to client
+            if(isValid==1){
+                //Authentication Successful
+
+                //write Faculty Menu
+                char* facultyMenu="Welcome to Faculty Menu\n"
+                                    "1.Add new course\n"
+                                    "2.Remove offered course\n"
+                                    "3.View enrollments in course\n"
+                                    "4.Password Change\n"
+                                    "5.Exit\n";
+                write(newsockfd,facultyMenu,strlen(facultyMenu));
+                //write Faculty Menu
+
+                //read Faculty choice
+                int facultyChoice;
+                read(newsockfd,&facultyChoice,sizeof(int));
+                //read Faculty choice
+
+                if(facultyChoice==1){
+                    struct Course addCourse;
+
+                    //write course code
+                    char* msg="Enter course code\n";
+                    write(newsockfd,msg,strlen(msg));
+                    //write course code
+
+                    //read course code
+                    read(newsockfd,&addCourse.course_code,sizeof(addCourse.course_code));
+                    //read course code
+
+
+                    //write course name
+                    msg="Enter course name\n";
+                    write(newsockfd,msg,strlen(msg));
+                    //write course codnamee
+
+                    //read course name
+                    read(newsockfd,&addCourse.course_name,sizeof(addCourse.course_name));
+                    //read course name
+
+                    //add facUID
+                    strcpy(addCourse.facultyUID,inputFacUID);
+                    //add facUID
+
+                    //write course credits
+                    msg="Enter course credits\n";
+                    write(newsockfd,msg,strlen(msg));
+                    //write course credits
+
+                    //read course credits
+                    read(newsockfd,&addCourse.credits,sizeof(addCourse.credits));
+                    //read course credits
+
+                    //current students enrolled
+                    addCourse.currentStudentsEnrolled=0;
+                    //current students enrolled
+
+
+                    //write course maxStudentsAllowed
+                    msg="Enter maximum Students allowed\n";
+                    write(newsockfd,msg,strlen(msg));
+                    //write course maxStudentsAllowed
+
+                    //read course maxStudentsAllowed
+                    read(newsockfd,&addCourse.maxStudentsAllowed,sizeof(addCourse.maxStudentsAllowed));
+                    //read course maxStudentsAllowed
+
+                    //is course active
+                    addCourse.status=1;
+                    //is course active
+                    int checker=searchActiveCourse(addCourse.course_code);
+
+
+                    //write checker
+                    write(newsockfd,&checker,sizeof(int));
+                    //write checker
+
+                    if(checker==-1){
+                        break;
+                    }
+                    else if(checker==0){
+                        //duplicate entry
+                        break;
+                    }
+                    else if(checker==1){
+                        //course not present
+
+                        //write course entry
+                        int addCourseEntry=AddCourse(addCourse);
+                        write(newsockfd,&addCourseEntry,sizeof(addCourseEntry));
+                        //write course entry
+
+                        if(addCourseEntry==-1){
+                            break;
+                        }else{
+                            //write course added successfully!!!
+                            msg="Course added successfully!!!\n";
+                            write(newsockfd,msg,strlen(msg));
+                            break;
+                            //write course added successfully!!!
+                        }
+                    }
+                    else{break;}
+
+
+                }
+                else if(facultyChoice==2){
+                    //remove course
+                    //ask for course_code
+                    char removeThisCourse[100];
+
+                    //write course code
+                    char* msg="Enter course code\n";
+                    write(newsockfd,msg,strlen(msg));
+                    //write course code
+
+                    //read course code
+                    read(newsockfd,&removeThisCourse,sizeof(removeThisCourse));
+                    //read course code
+
+                    int checker=searchActiveCourse(removeThisCourse);
+
+                    //write checker
+                    write(newsockfd,&checker,sizeof(int));
+                    //write checker
+
+                    if(checker==-1){
+                        //unable to access
+                        break;
+                    }else if(checker==0){
+                        removeCourse(removeThisCourse);
+
+                        msg="Course has been removed\n";
+
+                        //write course remove msg
+                        write(newsockfd,msg,strlen(msg));
+                        //write course remove msg
+                        break;
+                    }else if(checker==1){
+                        break;
+                    }else{
+                        break;
+                    }
+
+                }
+                else if(facultyChoice==3){
+                    //view enrollments
+
+                    //sendmsg for input 
+                    char* msg="Enter course code";
+                    write(newsockfd,msg,strlen(msg));
+                    //sendmsg for input 
+
+                    //read input coursecode
+                    char inputCourseCode[100];
+                    read(newsockfd,&inputCourseCode,sizeof(inputCourseCode));
+                    //read input coursecode
+
+                    int checker=searchActiveCourse(inputCourseCode);
+                    
+                    //send checker to client
+                    write(newsockfd,&checker,sizeof(int));
+                    //send checker to client
+
+                    if(checker==-1){
+                        //unable to access
+                        break;
+                    }else if(checker==0){
+                        //display 
+                        //send message
+                        msg="Number of current students are:\n";
+                        write(newsockfd,&msg,sizeof(msg));
+                        //send message
+
+                        //write value
+                        int activeStudents=getStudentCount(inputCourseCode);
+                        write(newsockfd,&activeStudents,sizeof(activeStudents));
+                        //write value
+                        break;
+                    }else if(checker==1){
+                        //course does not exist
+                        break;
+                    }else{
+                        break;
+                    }
+
+                }
+                else if(facultyChoice==4){
+                    //password change
+                    struct Faculty updateThisPassword;
+                    int fd=open("Faculty.txt",O_RDWR,0666);
+                    while(read(fd,&updateThisPassword,sizeof(updateThisPassword))>0){
+                        if(strcmp(updateThisPassword.facultyUID,inputFacUID)==0){
+                            //write msg to enter new password
+                            char* msg="Enter new password\n";
+                            write(newsockfd,msg,strlen(msg));
+                            //write msg to enter new password
+
+
+                            //read new password
+                            read(newsockfd,updateThisPassword.password,sizeof(updateThisPassword.name));
+                            //read new password
+                            lseek(fd,-1*sizeof(updateThisPassword),SEEK_CUR);
+                            write(fd,&updateThisPassword,sizeof(updateThisPassword));
+
+
+                            //write msg updation successful
+                            msg="Password has been updated\n";
+                            write(newsockfd,msg,strlen(msg));
+                            //write msg updation successful
+                            break;
+                        }
+                        break;
+                    }
+                }
+                else if(facultyChoice==5){
+                    break;
+                }else{
+                    break;
+                }
+            }
         }else{
             printf("wrong choice\n");
             break;

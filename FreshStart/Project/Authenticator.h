@@ -23,5 +23,22 @@ int AuthenticateAdmin(const char* inputEmail,
     }
     return 0;
 }
+int AuthenticateFaculty(const char* inputFacUID,
+                      const char* inputPassword){
+    const char* fileName="Faculty.txt";
+    int fd=open(fileName,O_RDONLY,0666);
+    if(fd==-1){
+        printf("Unable to authenticate admin\n");
+        return -1;
+    }
+    struct Faculty facultychk;
+    while(read(fd,&facultychk,sizeof(facultychk))>0){
+        if(strcmp(facultychk.facultyUID,inputFacUID)==0 &&
+           strcmp(facultychk.password,inputPassword)==0){
+            return 1;
+           }
+    }
+    return 0;
+}
 
 #endif
