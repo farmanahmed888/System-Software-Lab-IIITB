@@ -695,9 +695,42 @@ int main(int argc, char* argv[]){
                     }
                 }else if(studentChoice==3){
                     //view enrolled courses
-                    
-                }else if(studentChoice==4){
+                    //stores data from students in courses
+                    char viewCourseDetails[buffsz];
 
+                    viewEnrolledCourses(inputStudentUID,viewCourseDetails);
+                    
+                    //write view course details
+                    write(newsockfd,&viewCourseDetails,buffsz);
+                    //write view course details
+
+                    break;
+                }else if(studentChoice==4){
+                    struct Student updateThisPassword;
+                    int fd=open("Student.txt",O_RDWR,0666);
+                    while(read(fd,&updateThisPassword,sizeof(updateThisPassword))>0){
+                        if(strcmp(updateThisPassword.rollno,inputStudentUID)==0){
+                            //write msg to enter new password
+                            char* msg="Enter new password\n";
+                            write(newsockfd,msg,strlen(msg));
+                            //write msg to enter new password
+
+
+                            //read new password
+                            read(newsockfd,updateThisPassword.password,sizeof(updateThisPassword.name));
+                            //read new password
+                            lseek(fd,-1*sizeof(updateThisPassword),SEEK_CUR);
+                            write(fd,&updateThisPassword,sizeof(updateThisPassword));
+
+
+                            //write msg updation successful
+                            msg="Password has been updated\n";
+                            write(newsockfd,msg,strlen(msg));
+                            //write msg updation successful
+                            break;
+                        }
+                        break;
+                    }
                 }else if(studentChoice==5){
                     break;
                 }else{

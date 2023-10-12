@@ -669,8 +669,34 @@ int main(int argc, char* argv[]){
                     }
                 }else if(studentChoice==3){
                     //view enrolled courses
-                }else if(studentChoice==4){
 
+                    //read course details
+                    bzero(buffer,buffsz);
+                    read(sockfd,buffer,buffsz);
+                    printf("Server:\n %s\n",buffer);
+                    //read course details
+                    break;
+                }else if(studentChoice==4){
+                    //read enter new password
+                    bzero(buffer,buffsz);
+                    read(sockfd,buffer,buffsz);
+                    printf("Server:\n %s\n",buffer);
+                    //read enter new password
+
+
+                    //input new password
+                    char inputNewPassword[100];
+                    scanf("%s",inputNewPassword);
+                    write(sockfd,&inputNewPassword,sizeof(inputNewPassword));
+                    //input new password
+
+
+                    //read msg updation
+                    bzero(buffer,buffsz);
+                    read(sockfd,buffer,buffsz);
+                    printf("Server:\n %s\n",buffer);
+                    //read msg updation
+                    break;
                 }else if(studentChoice==5){
                     break;
                 }else{

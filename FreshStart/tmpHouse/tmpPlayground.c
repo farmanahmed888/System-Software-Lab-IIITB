@@ -41,14 +41,14 @@ struct Faculty{
 
 
 int main(){
-    int fd=open("Courses.txt",O_RDONLY,0666);
-    struct Course getStudentDetails;
-    while(read(fd,&getStudentDetails,sizeof(getStudentDetails))>0){
-        printf("Get Course course code  %s\n",getStudentDetails.course_code);
-        printf("Get Course course name  %s\n",getStudentDetails.course_name);
-        printf("Get Course facultyUID  %s\n",getStudentDetails.facultyUID);
-        printf("Get Course credits  %d\n",getStudentDetails.credits);
-        printf("Get Course current student enrolled  %d\n",getStudentDetails.currentStudentsEnrolled);
-        printf("Get Course max allowed  %d\n",getStudentDetails.maxStudentsAllowed);
+    int fd=open("StudentsInCourses.txt",O_RDONLY,0666);
+    struct Student abc;
+    while(read(fd,&abc,sizeof(abc))>0){
+        printf("course enrolled  %s\n",abc.courseEnrolled.course_code);
+        printf("Course name  %s\n",abc.courseEnrolled.course_name);
+        printf("course active?   %d\n",abc.courseEnrolled.status);
+        printf("is student enrolled  %d\n",abc.courseEnrolled.studentIsEnrolled);
     }
+    
+    
 }
