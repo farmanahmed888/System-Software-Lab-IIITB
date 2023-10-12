@@ -555,7 +555,155 @@ int main(int argc, char* argv[]){
 
             //authentication input
         }else if(choice==2){
+            //student login
+            //write input UID msg
+            char* StudentRollnoMsg="Enter Student rollno:\n";
+            write(newsockfd,StudentRollnoMsg,strlen(StudentRollnoMsg));
+            //write input email msg
 
+            //read input rollno
+            char inputStudentUID[100];
+            read(newsockfd,&inputStudentUID,sizeof(inputStudentUID));
+            //read input email
+
+            //write input Password msg
+            char* PasswordMsg="Enter Password:\n";
+            write(newsockfd,PasswordMsg,strlen(PasswordMsg));
+            //write input Password msg
+
+            //read input password
+            char inputPassword[100];
+            read(newsockfd,&inputPassword,sizeof(inputPassword));
+            //read input password
+
+            int isValid=AuthenticateStudent(inputStudentUID,inputPassword);
+            //write isvalid to client
+            write(newsockfd,&isValid,sizeof(isValid));
+            //write isvalid to client
+
+            if(isValid==1){
+                //write student Menu
+                char* studentMenu="Welcome to Student Menu\n"
+                                    "1.Enroll to new course\n"
+                                    "2.Unenroll from offered course\n"
+                                    "3.View enrollments in course\n"
+                                    "4.Password Change\n"
+                                    "5.Exit\n";
+                write(newsockfd,studentMenu,strlen(studentMenu));
+                //write student Menu
+
+
+                //read student choice
+                int studentChoice;
+                read(newsockfd,&studentChoice,sizeof(int));
+                //read student choice
+
+                if(studentChoice==1){
+
+                    char enrollInCourse[100];
+                    //write course code
+                    char* msg="Enter course code to enroll\n";
+                    write(newsockfd,msg,strlen(msg));
+                    //write course code
+
+
+                    //read course code
+                    read(newsockfd,&enrollInCourse,sizeof(enrollInCourse));
+                    //read course code
+
+
+                    int checker=searchActiveCourse(enrollInCourse);
+                    //write checker
+                    write(newsockfd,&checker,sizeof(int));
+                    //write checker
+
+
+                    if(checker==-1){
+                        //unable to access course database
+                        break;
+                    }else if(checker==0){   
+                        //course exists
+                        int enrollStatus=enrollInActiveCourse(enrollInCourse,inputStudentUID);
+                        //write enrollStatus
+                        write(newsockfd,&enrollStatus,sizeof(int));
+                        //write enrollStatus
+                        if(enrollStatus==-1){
+                            break;
+                        }else if(enrollStatus==1){
+                            //student is enrolled in course successfully
+
+                            break;
+                        }else if(enrollStatus==0){
+                            //one of condition fails
+                            break;
+                        }else{
+                            break;
+                        }
+                        break;
+                    }else if(checker==1){
+                        //course does not exist
+                        break;
+                    }else{
+                        break;
+                    }
+                }else if(studentChoice==2){
+                    //unenroll student
+                    char unEnrollInCourse[100];
+
+                    //write course code
+                    char* msg="Enter course code\n";
+                    write(newsockfd,msg,strlen(msg));
+                    //write course code
+
+                    //read course code
+                    read(newsockfd,&unEnrollInCourse,sizeof(unEnrollInCourse));
+                    //read course code
+
+
+                    int checker=searchActiveCourse(unEnrollInCourse);
+                    //write checker
+                    write(newsockfd,&checker,sizeof(int));
+                    //write checker
+
+                    if(checker==-1){
+                        //unable to access database
+                        break;
+                    }else if(checker==0){
+                        //course exists
+                        int unenrollStatus=unenrollInActiveCourse(unEnrollInCourse,inputStudentUID);
+                        //write unenrollStatus
+                        write(newsockfd,&unenrollStatus,sizeof(int));
+                        //write unenrollStatus
+                        if(unenrollStatus==-1){
+                            //error
+                            break;
+                        }else if(unenrollStatus==1){
+                            //success
+                            break;
+                        }else if(unenrollStatus==0){
+                            //failed
+                            break;
+                        }else{
+                            break;
+                        }
+                        break;
+                    }else if(checker==1){
+                        //course does not exist
+                        break;
+                    }else{
+                        break;
+                    }
+                }else if(studentChoice==3){
+                    //view enrolled courses
+                    
+                }else if(studentChoice==4){
+
+                }else if(studentChoice==5){
+                    break;
+                }else{
+                    break;
+                }
+            }
         }else if(choice==3){
             //faculty login
             //write input email msg

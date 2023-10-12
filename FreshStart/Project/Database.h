@@ -8,6 +8,7 @@ struct Course{
     int  currentStudentsEnrolled;
     int  maxStudentsAllowed;
 	int status;
+	int studentIsEnrolled;
 	//status=1 course active
 	//status=0 course removed
 };
@@ -22,7 +23,7 @@ struct Student{
 	char emailId[100];
 	char password[100];
 	int  status;
-	struct Course courseEnrolled[6];
+	struct Course courseEnrolled;
 };
 struct Faculty{
 	char name[100];
