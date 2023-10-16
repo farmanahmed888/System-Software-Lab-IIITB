@@ -89,7 +89,6 @@ int main(int argc, char* argv[]){
             int isValid;
             read(sockfd,&isValid,sizeof(int));
             if(isValid==1){
-                ADMIN:
                 while(1){
                 //read adminMenu msg
                 bzero(buffer,buffsz);
@@ -282,7 +281,7 @@ int main(int argc, char* argv[]){
                         read(sockfd,buffer,buffsz);
                         printf("Server:\n %s\n",buffer);
                         //read student not found
-                        
+                        break;
                     }else{
                         break;
                     }
@@ -518,7 +517,72 @@ int main(int argc, char* argv[]){
                         break;
                     }
                 }
-                else if(adminChoice==7){printf("Exiting...\n");break;}
+                else if(adminChoice==7){
+                    //read enter student rollo
+                    bzero(buffer,buffsz);
+                    read(sockfd,buffer,buffsz);
+                    printf("Server:\n %s",buffer);
+                    //read enterstudent rollo
+
+                    //write rollno
+                    char inputRollNo[100];
+                    scanf("%s",inputRollNo);
+                    write(sockfd,&inputRollNo,sizeof(inputRollNo));
+                    //write rollno
+
+                    //read checker
+                    int checker;
+                    read(sockfd,&checker,sizeof(checker));
+                    //read checker
+
+                    if(checker==-1){
+                        //database error
+                        printf("Unable to access Database\n");
+                        break;
+                    }else if(checker==0){
+                        bzero(buffer,buffsz);
+                        read(sockfd,buffer,buffsz);
+                        printf("%s\n",buffer);
+                        break;
+                    }else if(checker==1){
+                        break;
+                    }else{
+                        break;
+                    }
+                }else if(adminChoice==8){
+                    //read enter faculty rollo
+                    bzero(buffer,buffsz);
+                    read(sockfd,buffer,buffsz);
+                    printf("Server:\n %s",buffer);
+                    //read enterstudent rollo
+
+                    //write rollno
+                    char inputFACUID[100];
+                    scanf("%s",inputFACUID);
+                    write(sockfd,&inputFACUID,sizeof(inputFACUID));
+                    //write rollno
+
+                    //read checker
+                    int checker;
+                    read(sockfd,&checker,sizeof(checker));
+                    //read checker
+
+                    if(checker==-1){
+                        //database error
+                        printf("Unable to access Database\n");
+                        break;
+                    }else if(checker==0){
+                        bzero(buffer,buffsz);
+                        read(sockfd,buffer,buffsz);
+                        printf("%s\n",buffer);
+                    }else if(checker==1){
+                        printf("Entry does not exist\n");
+                        break;
+                    }else{
+                        break;
+                    }
+                }
+                else if(adminChoice==9){printf("Exiting...\n");break;}
                 else{printf("Wrong Choice,Exiting...\n");break;}
                 }
             }else{

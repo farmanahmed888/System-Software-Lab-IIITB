@@ -113,7 +113,9 @@ int main(int argc, char* argv[]){
                                 "4.Deactivate Student\n"
                                 "5.Update Student Details\n"
                                 "6.Update Faculty Details\n"
-                                "7.Exit\n";
+                                "7.View Student Details\n"
+                                "8.View Faculty Details\n"
+                                "9.Exit\n";
                 write(newsockfd,adminMenu,strlen(adminMenu));
                 //write adminMenu msg
                 
@@ -562,6 +564,107 @@ int main(int argc, char* argv[]){
 
                 }
                 else if(adminChoice==7){
+                    //write enterstudent rollo
+                    char* msg="Enter Student Roll No\n";
+                    write(newsockfd,msg,strlen(msg));
+                    //write enterstudent rollo
+
+
+                    //read roolno
+                    char inputRollNo[100];
+                    read(newsockfd,&inputRollNo,sizeof(inputRollNo));
+                    int checker=searchStudent(inputRollNo);
+
+                    //write checker
+                    write(newsockfd,&checker,sizeof(checker));
+                    //write checker
+                    if(checker==-1){
+                        //fail db access
+                        break;
+                    }else if(checker==0){
+                        //exist
+                        struct Student getDetails;
+                        int fd=open("Student.txt",O_RDONLY,0666);
+                        if(fd==-1){
+                            printf("unable to access Student database\n");
+                            break;
+                        }
+                        while(read(fd,&getDetails,sizeof(getDetails))>0){
+                            if(strcmp(getDetails.rollno,inputRollNo)==0){
+                                bzero(buffer,buffsz);
+                                strcat(buffer,"Student Roll Number is:  ");
+                                strcat(buffer,getDetails.rollno);
+                                strcat(buffer,"\n");
+                                strcat(buffer,"Student name is:  ");
+                                strcat(buffer,getDetails.name);
+                                strcat(buffer,"\n");
+                                strcat(buffer,"Is Student Active:  ");
+                                if(getDetails.status==1){
+                                    strcat(buffer,"1");
+                                }else{
+                                    strcat(buffer,"0");
+                                }
+                                strcat(buffer,"\n");
+                                write(newsockfd,&buffer,sizeof(buffer));
+                                break;
+                            }
+                        }
+                    }else if(checker==1){
+                        //does not exist
+                        break;
+                    }else{
+                        //other error
+                        break;
+                    }
+                    //read roolno
+                }else if(adminChoice==8){
+                    //faculty Details
+                    //write faculty rollo
+                    char* msg="Enter Faculty Unique ID\n";
+                    write(newsockfd,msg,strlen(msg));
+                    //write faculty rollo
+
+
+                    //read roolno
+                    char inputFACUID[100];
+                    read(newsockfd,&inputFACUID,sizeof(inputFACUID));
+                    int checker=searchFaculty(inputFACUID);
+                    //write checker
+                    write(newsockfd,&checker,sizeof(checker));
+                    //write checker
+                    if(checker==-1){
+                        //fail db access
+                        break;
+                    }else if(checker==0){
+                        //exist
+                        struct Faculty getDetails;
+                        int fd=open("Faculty.txt",O_RDONLY,0666);
+                        if(fd==-1){
+                            printf("unable to access Faculty database\n");
+                            break;
+                        }
+                        while(read(fd,&getDetails,sizeof(getDetails))>0){
+                            if(strcmp(getDetails.facultyUID,inputFACUID)==0){
+                                bzero(buffer,buffsz);
+                                strcat(buffer,"Faculty unique ID is:  ");
+                                strcat(buffer,getDetails.facultyUID);
+                                strcat(buffer,"\n");
+                                strcat(buffer,"Faculty name is:  ");
+                                strcat(buffer,getDetails.name);
+                                strcat(buffer,"\n");
+                                write(newsockfd,&buffer,sizeof(buffer));
+                                break;
+                            }
+                        }
+                    }else if(checker==1){
+                        //does not exist
+                        break;
+                    }else{
+                        //other error
+                        break;
+                    }
+                }
+                else if(adminChoice==9){
                     printf("Admin Exiting...\n");
                     break;}
                 else{

@@ -8,17 +8,31 @@
 
 int AddStudent(struct Student addStudent){
     //implement entire file locking
+    //locking struct defined
+    struct flock lock;
+	lock.l_type = F_WRLCK;
+	lock.l_whence = SEEK_SET;
+	lock.l_start = 0;
+	lock.l_len = 0;
+	lock.l_pid = getpid();
+    //locking struct defined
     const char* fileName="Student.txt";
     int fd=open(fileName,O_WRONLY|O_APPEND,0666);
     if(fd==-1){
         printf("Error Adding Student\n");
         return -1;
     }
+    //locking start
+    fcntl(fd, F_SETLKW, &lock);
     write(fd,&addStudent,sizeof(addStudent));
+    lock.l_type=F_UNLCK;
+	fcntl(fd, F_SETLK, &lock);
+    //locking end
     return 0;
 }
 int updateStatusStudent(struct Student updateStudent){
     //implement block file locking
+    
     struct Student buffStudent;
     const char* fileName="Student.txt";
     int fd=open(fileName,O_WRONLY,0666);
@@ -28,8 +42,21 @@ int updateStatusStudent(struct Student updateStudent){
     }
     while(read(fd,&buffStudent,sizeof(buffStudent))>0){
         if(strcmp(buffStudent.rollno,updateStudent.rollno)==0){
+            //locking struct defined
+            struct flock lock;
+	        lock.l_type = F_WRLCK;
+	        lock.l_whence = SEEK_CUR;
+	        lock.l_start = 0;
+	        lock.l_len = sizeof(buffStudent);
+	        lock.l_pid = getpid();
+            //locking struct defined
+            //locking start
+            fcntl(fd, F_SETLKW, &lock);
             lseek(fd,-1*sizeof(buffStudent),SEEK_CUR);
             write(fd,&updateStudent,sizeof(updateStudent));
+            lock.l_type=F_UNLCK;
+	        fcntl(fd, F_SETLK, &lock);
+            //locking end
             return 1;
         }
     }
@@ -38,32 +65,64 @@ int updateStatusStudent(struct Student updateStudent){
 
 int AddFaculty(struct Faculty addFaculty){
     //implement entire file locking
+    //locking struct defined
+    struct flock lock;
+	lock.l_type = F_WRLCK;
+	lock.l_whence = SEEK_SET;
+	lock.l_start = 0;
+	lock.l_len = 0;
+	lock.l_pid = getpid();
+    //locking struct defined
     const char* fileName="Faculty.txt";
     int fd=open(fileName,O_WRONLY|O_APPEND,0666);
     if(fd==-1){
         printf("Error Adding Faculty\n");
         return -1;
     }
+    //locking start
+    fcntl(fd, F_SETLKW, &lock);
     write(fd,&addFaculty,sizeof(addFaculty));
-    
+    lock.l_type=F_UNLCK;
+	fcntl(fd, F_SETLK, &lock);
+    //locking end
     return 0;
 }
 
 int AddCourse(struct Course addCourse){
     //implement entire file locking
+    //locking struct defined
+    struct flock lock;
+	lock.l_type = F_WRLCK;
+	lock.l_whence = SEEK_SET;
+	lock.l_start = 0;
+	lock.l_len = 0;
+	lock.l_pid = getpid();
+    //locking struct defined
     const char* fileName="Courses.txt";
     int fd=open(fileName,O_WRONLY|O_APPEND,0666);
     if(fd==-1){
         printf("Error Adding Course\n");
         return -1;
     }
+    //locking start
+    fcntl(fd, F_SETLKW, &lock);
     write(fd,&addCourse,sizeof(addCourse));
-    
+    lock.l_type=F_UNLCK;
+	fcntl(fd, F_SETLK, &lock);
+    //locking end
     return 0;
 }
 
 int removeCourse(const char* removeCourse){
     //implement block file locking
+    //locking struct defined
+    struct flock lock;
+	lock.l_type = F_WRLCK;
+	lock.l_whence = SEEK_SET;
+	lock.l_start = 0;
+	lock.l_len = 0;
+	lock.l_pid = getpid();
+    //locking struct defined
     struct Course buffCourse;
     struct Student buffStudent;
     const char* fileName="Courses.txt";
@@ -84,8 +143,13 @@ int removeCourse(const char* removeCourse){
     while(read(fd1,&buffCourse,sizeof(buffCourse))>0){
         if(strcmp(buffCourse.course_code,removeCourse)==0){
             buffCourse.status=0;
+            //locking start
+            fcntl(fd1, F_SETLKW, &lock);
             lseek(fd1,-1*sizeof(buffCourse),SEEK_CUR);
             write(fd1,&removeCourse,sizeof(removeCourse));
+            lock.l_type=F_UNLCK;
+	        fcntl(fd1, F_SETLK, &lock);
+            //LOCKING END
             return 1;
         }
     }
@@ -121,7 +185,20 @@ int enrollInActiveCourse(const char* enrollInCourse,
                         chkStudent.courseEnrolled.maxStudentsAllowed=chkCourse.maxStudentsAllowed;
                         chkStudent.courseEnrolled.studentIsEnrolled=1;
                         chkStudent.courseEnrolled.status=chkCourse.status;
+                        //implement here
+                        //locking struct defined
+                        struct flock lock;
+	                    lock.l_type = F_WRLCK;
+	                    lock.l_whence = SEEK_SET;
+	                    lock.l_start = 0;
+	                    lock.l_len = 0;
+	                    lock.l_pid = getpid();
+                        //locking struct defined
+                        //locking start
                         write(fd2,&chkStudent,sizeof(chkStudent));
+                        lock.l_type=F_UNLCK;
+	                    fcntl(fd2, F_SETLK, &lock);
+                        //locking end
                         printf("course has been added successfully\n");
                         return 1;
                     }
@@ -138,6 +215,7 @@ int unenrollInActiveCourse(const char* unenrollInCourse,
     struct Student chkStudent;
     const char* studInCourse="StudentsInCourses.txt";//partial part of file locking
     const char* coursesFile="Courses.txt";//partial part of file locking
+    
     int fd1=open(studInCourse,O_RDWR,0666);
     int fd2=open(coursesFile,O_RDWR,0666);
     if(fd1==-1||fd2==-1){
@@ -149,15 +227,41 @@ int unenrollInActiveCourse(const char* unenrollInCourse,
             chkStudent.courseEnrolled.studentIsEnrolled==1){
                 chkStudent.courseEnrolled.studentIsEnrolled=0;
                 chkStudent.courseEnrolled.currentStudentsEnrolled--;
+                //locking structure
+                struct flock lock1;
+	            lock1.l_type = F_WRLCK;
+	            lock1.l_whence = SEEK_CUR;
+	            lock1.l_start = 0;
+	            lock1.l_len = sizeof(chkStudent);
+	            lock1.l_pid = getpid();
+                //locking structure
+                //locking start
+                fcntl(fd1, F_SETLKW, &lock1);
                 lseek(fd1,-1*sizeof(chkStudent),SEEK_CUR);
                 write(fd1,&chkStudent,sizeof(chkStudent));
+                lock1.l_type=F_UNLCK;
+	            fcntl(fd1, F_SETLK, &lock1);
+                //locking end
                 printf("student has been unenrolled\n");
                 while(read(fd2,&chkCourse,sizeof(chkCourse))){
                     if(strcmp(chkCourse.course_code,unenrollInCourse)==0){
                         if(chkCourse.currentStudentsEnrolled>0){
                             chkCourse.currentStudentsEnrolled--;
+                            //locking structure
+                            struct flock lock2;
+	                        lock2.l_type = F_WRLCK;
+	                        lock2.l_whence = SEEK_CUR;
+	                        lock2.l_start = 0;
+	                        lock2.l_len = sizeof(chkStudent);
+	                        lock2.l_pid = getpid();
+                            //locking structure
+                            //locking start
+                            fcntl(fd2, F_SETLKW, &lock2);
                             lseek(fd2,-1*sizeof(chkCourse),SEEK_CUR);
                             write(fd2,&chkCourse,sizeof(chkCourse));
+                            lock2.l_type=F_UNLCK;
+	                        fcntl(fd2, F_SETLK, &lock2);
+                            //locking end
                             printf("course count decremented\n");
                             return 1;
                         }
@@ -188,8 +292,6 @@ int viewEnrolledCourses(const char* inputStudentUID, char* buffs){
                 strcat(buffs, "Course Name:   ");
                 strcat(buffs, displayEnrolled.courseEnrolled.course_name);
                 strcat(buffs,"\n");
-                //printf("Course Code:   %s\n",displayEnrolled.courseEnrolled.course_code);
-                //printf("Course Name:   %s\n",displayEnrolled.courseEnrolled.course_name);
             }
     }
     return 1;
