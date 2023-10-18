@@ -1,3 +1,13 @@
+/*
+============================================================================
+Name : 17.c
+Author : Farman Ahmed
+Description : Write a program to execute ls -l | wc.
+a. use dup
+Date: 12th Oct, 2023.
+============================================================================
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>

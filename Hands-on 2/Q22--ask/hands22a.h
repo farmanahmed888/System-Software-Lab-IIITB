@@ -1,7 +1,6 @@
-include <errno.h>
-
-char *fifoOneName = "./21-fifoOne";
-char *fifoTwoName = "./21-fifoTwo";
+#include <errno.h>
+char *fifoOneName = "myfifo1";
+char *fifoTwoName = "myfifo2";
 
 void init()
 {

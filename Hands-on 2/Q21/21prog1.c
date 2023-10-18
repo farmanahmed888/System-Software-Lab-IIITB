@@ -1,3 +1,11 @@
+/*
+============================================================================
+Name : 21prog1.c
+Author : Farman Ahmed
+Description : Write two programs so that both can communicate by FIFO -Use two way communications.
+Date: 15th Oct, 2023.
+============================================================================
+*/
 #include <unistd.h>
 #include <stdio.h>
 #include <fcntl.h>

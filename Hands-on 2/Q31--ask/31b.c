@@ -1,3 +1,12 @@
+/*
+============================================================================
+Name : 31a.c
+Author : Farman Ahmed
+Description : Write a program to create a semaphore and initialize value to the semaphore.
+b. create a counting semaphore
+Date: 17th Oct, 2023.
+============================================================================
+*/
 #include<pthread.h>
 #include<stdio.h>
 #include<semaphore.h>
@@ -10,7 +19,7 @@ sem_t s;
 
 int main()
 {
-sem_init(&s,0,1);
+sem_init(&s,0,2);
 
 pthread_t thread1,thread2;
 pthread_create(&thread1,NULL,fun1, NULL);

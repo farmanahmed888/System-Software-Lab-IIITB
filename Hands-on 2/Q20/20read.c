@@ -1,3 +1,11 @@
+/*
+============================================================================
+Name : 20.c
+Author : Farman Ahmed
+Description :Write two programs so that both can communicate by FIFO -Use one way communication.
+Date: 15th Oct, 2023.
+============================================================================
+*/
 #include <fcntl.h>
 #include <stdio.h>
 #include <unistd.h>

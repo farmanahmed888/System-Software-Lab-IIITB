@@ -1,3 +1,12 @@
+/*
+============================================================================
+Name : 26.c
+Author : Farman Ahmed
+Description : Write a program to send messages to the message queue. Check $ipcs -q
+Date: 16th Oct, 2023.
+============================================================================
+*/
+
 #include<stdlib.h>
 #include<unistd.h>
 #include<string.h>

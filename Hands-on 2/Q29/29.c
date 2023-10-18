@@ -1,3 +1,12 @@
+/*
+============================================================================
+Name : 29.c
+Author : Farman Ahmed
+Description : Write a program to remove the message queue.
+Date: 16th Oct, 2023.
+============================================================================
+*/
+
 #include<stdlib.h>
 #include<unistd.h>
 #include<string.h>

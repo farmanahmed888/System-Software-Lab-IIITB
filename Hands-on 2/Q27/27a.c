@@ -1,3 +1,12 @@
+/*
+============================================================================
+Name : 27a.c
+Author : Farman Ahmed
+Description : Write a program to receive messages from the message queue.
+a. with 0 as a flag
+Date: 16th Oct, 2023.
+============================================================================
+*/
 #include<stdlib.h>
 #include<unistd.h>
 #include<string.h>

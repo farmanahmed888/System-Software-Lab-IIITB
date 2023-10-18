@@ -1,3 +1,12 @@
+/*
+============================================================================
+Name : 27b.c
+Author : Farman Ahmed
+Description : Write a program to receive messages from the message queue.
+b. with IPC_NOWAIT as a flag
+Date: 16th Oct, 2023.
+============================================================================
+*/
 #include<stdlib.h>
 #include<unistd.h>
 #include<string.h>

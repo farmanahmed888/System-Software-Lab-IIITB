@@ -1,26 +1,19 @@
+/*
+============================================================================
+Name : 31a.c
+Author : Farman Ahmed
+Description : Write a program to create a semaphore and initialize value to the semaphore.
+a. create a binary semaphore
+Date: 17th Oct, 2023.
+============================================================================
+*/
 #include<pthread.h>
 #include<stdio.h>
 #include<semaphore.h>
 #include<unistd.h>
 
-void *fun1();
-void *fun2();
 int shared=1;
 sem_t s;
-
-int main()
-{
-sem_init(&s,0,2);
-
-pthread_t thread1,thread2;
-pthread_create(&thread1,NULL,fun1, NULL);
-pthread_create(&thread2,NULL, fun2, NULL);
-pthread_join(thread1,NULL);
-pthread_join(thread2,NULL);
-printf("final value of shared %d\n",shared);
-}
-
-
 void *fun1(){
 int x;
 sem_wait(&s);
@@ -34,10 +27,8 @@ shared=x;
 printf("value of shared variable updated by thread1 %d\n", shared);
 //critical section end
 sem_post(&s);
+
 }
-
-
-
 void *fun2(){
 int y;
 sem_wait(&s);
@@ -51,4 +42,16 @@ shared=y;
 printf("value of shared variable by thraed2 %d\n",shared);
 //critical section ends
 sem_post(&s);
+}
+
+int main()
+{
+sem_init(&s,0,1);
+
+pthread_t thread1,thread2;
+pthread_create(&thread1,NULL,fun1, NULL);
+pthread_create(&thread2,NULL, fun2, NULL);
+pthread_join(thread1,NULL);
+pthread_join(thread2,NULL);
+printf("final value of shared %d\n",shared);
 }
