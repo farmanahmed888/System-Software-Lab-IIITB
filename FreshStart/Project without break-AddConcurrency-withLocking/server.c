@@ -40,11 +40,11 @@ int main(int argc, char* argv[]){
     }
     listen(sockfd,5);
     clilen=sizeof(cli_addr);
-    newsockfd=accept(sockfd,(struct sockaddr*)&cli_addr,&clilen);
+    /*newsockfd=accept(sockfd,(struct sockaddr*)&cli_addr,&clilen);
     if(newsockfd<0){
         printf("error on accept\n");
         return -1;
-    }
+    }*/
     //communication between a client and server starts
     while(1){
         //changes done here for concurrency
@@ -522,10 +522,10 @@ int main(int argc, char* argv[]){
 
                         }else if(namePass==2){
                             //update password
-                            struct Student updatePassword;
-                            int fd=open("Student.txt",O_RDONLY,0666);
+                            struct Faculty updatePassword;
+                            int fd=open("Faculty.txt",O_RDONLY,0666);
                             while(read(fd,&updatePassword,sizeof(updatePassword))>0){
-                                if(strcmp(updatePassword.rollno,inputUID)==0){
+                                if(strcmp(updatePassword.facultyUID,inputUID)==0){
                                     //write msg to enter new password
                                     msg="Enter new password\n";
                                     write(newsockfd,msg,strlen(msg));

@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "HeaderFiles/database.h"
+#include "Database.h"
 int main(){
     struct Admin addAdmin;
     int fd=open("Database/Admin.txt",O_WRONLY|O_CREAT|O_APPEND,0666);

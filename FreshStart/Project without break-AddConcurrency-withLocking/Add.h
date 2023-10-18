@@ -143,6 +143,7 @@ int removeCourse(const char* removeCourse){
     while(read(fd1,&buffCourse,sizeof(buffCourse))>0){
         if(strcmp(buffCourse.course_code,removeCourse)==0){
             buffCourse.status=0;
+            buffCourse.currentStudentsEnrolled=0;
             //locking start
             fcntl(fd1, F_SETLKW, &lock);
             lseek(fd1,-1*sizeof(buffCourse),SEEK_CUR);
