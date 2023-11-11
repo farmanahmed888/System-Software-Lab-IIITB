@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang = "en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"><!--we have added this view port tag and set initial scale to 1 so that our side shoudl be adjustable according to different devices especially for mobile devices-->
+        <title>Ethos Watches | Luxury Watch Retailer </title>
+        <link rel="stylesheet" href="CSS/style.css"> 
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet"><!--poppins font from google fonts website then select popping select some types and then embed-->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"><!--link to connect to font awesome 4 to use different icons, just type font awesome 4 cdn and click on first link and copy the url and past it here with rel="stylesheet"-->
+    </head>
+
+    <body>
+
+        <!--making header-->
+    <div class="header">
+        <div class="container">
+
+            <!--making navigation bar consist of logo and menu links-->
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html"><img src="img/logo.jpeg" width=200px></a>
+                </div>
+
+                <!--menu-->
+                 <nav> 
+                    <ul id="MenuItems"><!--use this id in js-->                   
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="Products.html">Products</a></li>
+                        <li><a href="">About</a></li>
+                        <li><a href="">Contact</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html"><img src="img/cart.png" alt="cart" width=30px height=30px></a><!--adding cart image in navigation section -->
+                <img src="img/menu.png" class="menu-icon" onclick="menutoggle()"><!--this is the menu icon which  will be displayed on smaller screens with 3 lines, and when we click on it, it will open upside down or like dropdown menu, to open like this we have pass one menutoggle function to it which we have written in the end in js-->
+            </div>
+
+        
+            <!--making another section in header class container-->
+            <div class="row">
+
+                <!--dividing this section into 2 columns-->
+                <!--1st column for heading button and text-->
+                <div class="col-2">
+                    <h1>The Openworked Sandblasted</h1>
+                    <p>Speake-Marins One & Two Openworked Sandblasted for 2023 
+                        <br>brings to the forefront the concepts of harmony and balance in watch design. 
+                    </p>
+                    <a href="" class="btn">Explore Now &#8594;</a><!--where &#8594 is the code of arrow icon in explore now button-->
+                </div>
+
+                <!--2nd for image-->
+                <div class="col-2">
+                    <img src="img/image1.png" alt="header image">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--Featured categories-->
+    <!--categores class to edit whole section, then small container class to edit whole row, then row class to edit area surrounding images, then col-3 class to edit col of each image then col-3 img used in css to edit image -->
+    <div class="categories">
+
+        <!--we will create 3 column for 3 images at a time in single row like we did above by making 2 columns-->
+
+        <!--small container class contains row which consist of whole columns sections then col-3 which consist of col of images-->
+        <div class="small container">,<!--container class to edit images section-->
+            <div class="row">
+
+                <!--3 columns for 3 images-->
+                <div class="col-3">
+                    <img src="img/product-1.jpg" alt="">
+                </div>
+                <div class="col-3">
+                    <img src="img/category-2.jpg" alt="">
+                </div>
+                <div class="col-3">
+                    <img src="img/category-3.jpg" alt="">
+                </div>
+    
+            </div>
+        </div>
+
+    </div>
+
+     <!--Featured Products-->
+     <!--using same class small container to maintain same styling-->
+     
+     <div class="small container">
+         <!--using again same row class to maintain same styling -->
+        <h2 class="title">Featured Products</h2>
+         <div class="row">
+             <!--this time we will make 4 columns-->
+     
+             <!--it contains 4 different products with heading h4, image, price <p> and rating star-->
+             <div class="col-4">
+                 <a href="product-detail.html"><img src="img/category-1.jpg"></a><!--product img-->
+                 <a href="product-detail.html"><h4>Watch - 1</h4></a><!--product title-->
+                 <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                    <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                 </div>
+                 <p>$50.00</p><!--product price-->
+             </div>
+
+             <div class="col-4">
+                <img src="img/product-2.jpg"><!--product img-->
+                <h4>Watch - 2</h4><!--product title-->
+                <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                   <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star-o" aria-hidden="true"></i>
+                </div>
+                <p>$50.00</p><!--product price-->
+            </div>
+
+            <div class="col-4">
+                <img src="img/product-3.jpg"><!--product img-->
+                <h4>Watch - 3</h4><!--product title-->
+                <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                   <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                   <i class="fa fa-star-o" aria-hidden="true"></i>
+                </div>
+                <p>$50.00</p><!--product price-->
+            </div>
+         </div>
+
+         <!--adding latest products in class small container after featured products row-->
+
+         <h2 class="title">Latest Products</h2>
+         <div class="row">
+             <!--this time we will make 4 columns-->
+     
+             <!--it contains 4 different products with heading h4, image, price <p> and rating star-->
+             
+
+             <div class="col-4">
+                <img src="img/product-6.jpg"><!--product img-->
+                <h4>Watch - 5</h4><!--product title-->
+                <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                   <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star-o" aria-hidden="true"></i>
+                </div>
+                <p>$50.00</p><!--product price-->
+                 </div>
+
+             <div class="col-4">
+                <img src="img/product-7.jpg"><!--product img-->
+                <h4>Watch - 6</h4><!--product title-->
+                <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                   <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                   <i class="fa fa-star-o" aria-hidden="true"></i>
+                </div>
+                <p>$50.00</p><!--product price-->
+              </div>
+
+             <div class="col-4">
+                <img src="img/product-8.jpg"><!--product img-->
+                <h4>Watch - 7</h4><!--product title-->
+                <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                   <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star-half-o" aria-hidden="true"></i>
+
+                </div>
+                <p>$50.00</p><!--product price-->
+              </div>
+         </div>    
+        <div class="row">
+            <div class="col-4">
+                <img src="img/product-9.jpg"><!--product img-->
+                <h4>Watch - 8</h4><!--product title-->
+                <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                   <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star" aria-hidden="true"></i>
+                   <i class="fa fa-star-o" aria-hidden="true"></i>
+                </div>
+                <p>$50.00</p><!--product price-->
+            </div>
+
+            
+
+           <div class="col-4">
+               <img src="img/product-11.jpg"><!--product img-->
+               <h4>Watch - 9</h4><!--product title-->
+               <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                  <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                  <i class="fa fa-star-o" aria-hidden="true"></i>
+               </div>
+               <p>$50.00</p><!--product price-->
+           </div>
+
+           <div class="col-4">
+               <img src="img/product-12.jpg"><!--product img-->
+               <h4>Watch - 10</h4><!--product title-->
+               <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                  <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star" aria-hidden="true"></i>
+                  <i class="fa fa-star-half-o" aria-hidden="true"></i>
+
+               </div>
+               <p>$50.00</p><!--product price-->
+           </div>
+        </div>
+
+    </div>
+
+    <!--offer-->
+    <div class="offer">
+        <div class="container">
+            <div class="row">
+                
+                <div class="col-2">
+                   <img src="img/exclusive.png" class="offer-img"> 
+                </div>
+
+                <div class="col-2">
+                    <p>Exclusively available on Ethos</p>
+                    <h1>M2/02M</h1>
+                    <small>
+                        M2/02M is the timeless M2/02 with a factory fitted stainless steel PVD Gun metal bracelet.
+                        <br>The addition of the PVD gun metal stainless steel bracelet to the M2/02 turns it into a definitive statement piece.
+                    </small>
+                    <a href="" class="btn">Buy Now &#8594;</a><!--where &#8594 is the code of arrow icon in explore now button-->
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!----------------testimonials-------------->
+
+    <div class="testimonial">
+        <div class="small container"><!--section-->
+            <div class="row"><!--row-->
+                
+                <!--3 comments-->
+                <div class="col-3"><!--3 columns-->
+
+                    <!--add " or left quote before comment-->
+                    <i class="fa fa-quote-left" aria-hidden="true"></i>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the prinitng and typesetting industry. Lorem Ipsum has been the industry;s standard dummy text ever
+                    </p>
+                    <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                        <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                     </div>
+                     <img src="img/user-1.png"><!--image of person-->
+                     <h3>Sean Parker</h3><!--name of person-->
+   
+                </div>
+
+                <div class="col-3"><!--3 columns-->
+
+                    <!--add " or left quote before comment-->
+                    <i class="fa fa-quote-left" aria-hidden="true"></i>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the prinitng and typesetting industry. Lorem Ipsum has been the industry;s standard dummy text ever
+                    </p>
+                    <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                        <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                     </div>
+                     <img src="img/user-2.png"><!--image of person-->
+                     <h3>Mike Smith</h3><!--name of person-->
+   
+                </div>
+
+                <div class="col-3"><!--3 columns-->
+
+                    <!--add " or left quote before comment-->
+                    <i class="fa fa-quote-left" aria-hidden="true"></i>
+                    <p>
+                        Lorem Ipsum is simply dummy text of the prinitng and typesetting industry. Lorem Ipsum has been the industry;s standard dummy text ever
+                    </p>
+                    <div class="rating"><!--add stars for rating of product from font awesome 4-->
+                        <i class="fa fa-star" aria-hidden="true"></i><!--add 4 black start and one transparent star to show 4 out of 5 rating-->
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star" aria-hidden="true"></i>
+                        <i class="fa fa-star-half-o" aria-hidden="true"></i>
+                     </div>
+                     <img src="img/user-3.png"><!--image of person-->
+                     <h3>Mable Joe</h3><!--name of person-->
+   
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!----------brands-------------->
+
+    <div class="brands">
+        <div class="small container">
+            <div class="row">
+                <div class="col-5">
+                     <img src="img/logo-1.png">
+                </div>
+
+                <div class="col-5">
+                    <img src="img/logo-2.png">
+               </div>
+
+
+               <div class="col-5">
+                <img src="img/logo-3.png">
+                </div>
+
+
+                <div class="col-5">
+                 <img src="img/logo-4.png">
+                </div>
+
+
+                 <div class="col-5">
+                   <img src="img/logo-5.png">
+                </div>
+
+            </div>
+        </div>
+    </div>
+     
+    <!-------footer------->
+    <div class="footer">
+        <div class="container"><!-- it will follow same styling as of header-->
+            <div class="row">
+                
+                <!--it contains 4 columns col1 contains text and col2 contain image col3 contains useful links and col4 contains social media links-->
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and Ios mobile phone.</p>
+                   
+                   <!---add images of play store and appstore in 1st column-->
+                    <div class="app-logo">
+                        <img src="img/play-store.png">
+                        <img src="img/app-store.png">
+                    </div>   
+                
+                </div>
+
+                <div class="footer-col-2">
+                    <img src="img/logo-white.png">
+                    <p>Our purpose is To Sustainably Make the Pleasure and Benefits of Sports Accessible to the Many.</p>
+                </div>
+
+                <div class="footer-col-3">
+                    <h3>Useful Links</h3>
+                    <ul>
+                        <li>Coupons</li>
+                        <li>Blog Post</li>
+                        <li>Return Policy</li>
+                        <li>Join Affiliate</li>
+                    </ul>
+                    
+                </div>
+
+                <div class="footer-col-4">
+                    <h3>Follow Us</h3>
+                    <ul>
+                        <li>Facebook</li>
+                        <li>Twitter</li>
+                        <li>Instagram</li>
+                        <li>Youtube</li>
+                    </ul>
+                    
+                </div>
+            </div>
+            <!--add horizontal line and copyright text along with clickable link-->
+        </div>
+    </div>         
+
+    <!-----------------JS----------------------->
+    <script>
+        //declare variable MenuItems which take ul having id "MenuItems"
+        
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";//by default, we have set menu or dropdown menu height to 0px, means it is close by default
+        
+        function menutoggle()//this is the function which we have called above in nav which works on small devices and users click on it
+        {
+            if (MenuItems.style.maxHeight =="0px")//when user click on it and if it is closed or its height is 0px, then it will open or it should have heigt of 200px upon clicking
+            {
+                MenuItems.style.maxHeight = "200px"
+            }
+            else//if user not clicked or it has already opened, then it will upon clicking again closed
+            {
+                MenuItems.style.maxHeight = "0px" 
+            }
+        
+        }
+    </script>    
+    
+    </body>
+
+</html>
