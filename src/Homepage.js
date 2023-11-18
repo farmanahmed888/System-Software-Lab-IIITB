@@ -1,3 +1,6 @@
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+
+
 const Homepage = () => {
     return (
         <div className="combineall">
@@ -18,23 +21,7 @@ const Homepage = () => {
                     <img src={require("./img/image1.png")} alt="header" />
                 </div>
             </div>
-            <div className="categories">
-                <div className="small container">
-                    ,{/*container class to edit images section*/}
-                    <div className="row">
-                        {/*3 columns for 3 images*/}
-                        <div className="col-3">
-                            <img src={require("./img/category-1.jpg")} alt="" />
-                        </div>
-                        <div className="col-3">
-                            <img src={require("./img/category-2.jpg")} alt="" />
-                        </div>
-                        <div className="col-3">
-                            <img src={require("./img/category-3.jpg")} alt="" />
-                        </div>
-                    </div>
-                </div>
-            </div>
+            
             <div className="small container">
                 {/*using again same row class to maintain same styling */}
                 <h2 className="title">Featured Products</h2>
@@ -42,13 +29,13 @@ const Homepage = () => {
                     {/*this time we will make 4 columns*/}
                     {/*it contains 4 different products with heading h4, image, price <p> and rating star*/}
                     <div className="col-4">
-                        <a href="product-detail.html">
+                        <Link to="/ProductDetail">
                             <img src={require("./img/category-1.jpg")} alt="cat1" />
-                        </a>
+                        </Link>
                         {/*product img*/}
-                        <a href="product-detail.html">
+                        <Link to="/ProductDetail">
                             <h4>Watch - 1</h4>
-                        </a>
+                        </Link>
                         {/*product title*/}
                         <div className="rating">
                             {/*add stars for rating of product from font awesome 4*/}
