@@ -40,6 +40,8 @@ The Academia Portal is a multifunctional system that manages student and faculty
    - Connect to the server.
    - Enter login credentials.
    - Access options to enrol/unenroll from courses, view enrolled courses, and change passwords.
+
+
 COMPILE BY:
     cc server.c -o server
     cc client.c -o client
