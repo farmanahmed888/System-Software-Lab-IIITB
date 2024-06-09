@@ -41,3 +41,7 @@ The Academia Portal is a multifunctional system that manages student and faculty
    - Enter login credentials.
    - Access options to enrol/unenroll from courses, view enrolled courses, and change passwords.
 
+TO RUN SERVER:
+    ./server 8081
+TO RUN CLIENT:
+    ./client 192.168.0.1 8081
