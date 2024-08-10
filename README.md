@@ -16,6 +16,11 @@ The Academia Portal is a multifunctional system that manages student and faculty
 - **System Calls Usage**: The project employs system calls instead of library functions wherever possible, including process management, file management, file locking, semaphores, multithreading, and inter-process communication mechanisms.
 - **Socket Programming**: The server maintains the database and serves multiple clients concurrently. Clients can connect to the server and access their specific academic details.
 
+## Project Directory
+```
+FreshStart/Project without break-AddConcurrency-withLocking
+```
+
 ## Installation
 
 1. Clone the repository to your local machine.
